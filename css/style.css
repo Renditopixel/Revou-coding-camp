@@ -1,0 +1,505 @@
+/* ============================================================
+   LIFE DASHBOARD — style.css
+   ============================================================ */
+
+/* ── CSS Variables ─────────────────────────────────────────── */
+:root {
+  --bg-page:      linear-gradient(135deg, #4b3fa0 0%, #7b5ea7 50%, #a56abd 100%);
+  --bg-card:      #ffffff;
+  --bg-input:     #f4f5f7;
+  --border:       #e0e3ea;
+  --text:         #2d2d2d;
+  --text-muted:   #888fa0;
+  --text-card:    #3a3a4a;
+  --clock-color:  #5c6bc0;
+  --accent:       #5c6bc0;
+  --accent-hover: #3f51b5;
+  --btn-timer-bg: #e8eaf6;
+  --btn-timer-color: #3f51b5;
+  --btn-add-bg:   #5c6bc0;
+  --btn-add-color:#ffffff;
+  --delete-bg:    #e53935;
+  --delete-color: #ffffff;
+  --shadow:       0 2px 12px rgba(0,0,0,0.10);
+  --radius:       12px;
+  --radius-sm:    7px;
+  --font:         'Segoe UI', system-ui, -apple-system, sans-serif;
+  --transition:   0.18s ease;
+}
+
+[data-theme="dark"] {
+  --bg-page:      linear-gradient(135deg, #1a1440 0%, #2d2060 50%, #3d1f5e 100%);
+  --bg-card:      #1e1e2e;
+  --bg-input:     #2a2a3e;
+  --border:       #3a3a55;
+  --text:         #e2e4f0;
+  --text-muted:   #7a7d99;
+  --text-card:    #d0d3e8;
+  --clock-color:  #818cf8;
+  --accent:       #818cf8;
+  --accent-hover: #6366f1;
+  --btn-timer-bg: #2e2e50;
+  --btn-timer-color: #a5b4fc;
+  --btn-add-bg:   #6366f1;
+  --btn-add-color:#ffffff;
+  --delete-bg:    #c0392b;
+  --delete-color: #ffffff;
+  --shadow:       0 2px 16px rgba(0,0,0,0.40);
+}
+
+/* ── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; }
+
+body {
+  font-family: var(--font);
+  min-height: 100vh;
+  background: var(--bg-page);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 36px 16px 48px;
+  transition: background var(--transition);
+}
+
+/* ── Page wrapper ──────────────────────────────────────────── */
+.page-wrapper {
+  width: 100%;
+  max-width: 780px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ── Cards ─────────────────────────────────────────────────── */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  box-shadow: var(--shadow);
+  transition: background var(--transition), box-shadow var(--transition);
+}
+
+.card-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+/* ── Clock Card ────────────────────────────────────────────── */
+.clock-card {
+  text-align: center;
+  padding: 28px 28px 20px;
+  position: relative;
+}
+
+.clock {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--clock-color);
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.date-display {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+  margin-bottom: 6px;
+}
+
+.greeting {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+/* Custom name row */
+.name-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Theme toggle — top-right of clock card */
+.theme-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+}
+
+/* ── Middle row ────────────────────────────────────────────── */
+.middle-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+/* ── Timer Card ────────────────────────────────────────────── */
+.timer-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pomodoro-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.timer-display {
+  font-size: 3.4rem;
+  font-weight: 800;
+  color: var(--clock-color);
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  margin: 8px 0 20px;
+}
+
+.timer-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.timer-status {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 10px;
+  min-height: 1.2em;
+  text-align: center;
+}
+
+/* ── Tasks Card ────────────────────────────────────────────── */
+.tasks-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.sort-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.todo-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.todo-list::-webkit-scrollbar { width: 4px; }
+.todo-list::-webkit-scrollbar-track { background: transparent; }
+.todo-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+/* ── Todo Item ─────────────────────────────────────────────── */
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  transition: border-color var(--transition), opacity var(--transition);
+}
+
+.todo-item:hover { border-color: var(--accent); }
+
+.todo-item.done { opacity: 0.5; }
+.todo-item.done .todo-item__text { text-decoration: line-through; color: var(--text-muted); }
+
+.todo-item__checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.todo-item__text {
+  flex: 1;
+  font-size: 0.92rem;
+  color: var(--text-card);
+  word-break: break-word;
+}
+
+.todo-item__edit-input {
+  flex: 1;
+  font-size: 0.92rem;
+  border: none;
+  border-bottom: 2px solid var(--accent);
+  background: transparent;
+  color: var(--text);
+  outline: none;
+  padding: 1px 0;
+  font-family: var(--font);
+}
+
+.todo-item__actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+/* ── Quick Links Card ──────────────────────────────────────── */
+.links-card { width: 100%; }
+
+.links-input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.links-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Link buttons — match screenshot style */
+.link-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 18px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: background var(--transition), transform 0.1s;
+}
+
+.link-chip:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.link-chip__label {
+  color: inherit;
+  text-decoration: none;
+}
+
+.link-chip__delete {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.75);
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: color var(--transition);
+}
+
+.link-chip__delete:hover { color: #fff; }
+
+/* ── Buttons ───────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.86rem;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), transform 0.1s;
+  white-space: nowrap;
+}
+
+.btn:active { transform: scale(0.96); }
+
+/* Timer buttons — match screenshot (light indigo) */
+.btn--timer {
+  background: var(--btn-timer-bg);
+  color: var(--btn-timer-color);
+  padding: 7px 18px;
+}
+.btn--timer:hover { background: var(--accent); color: #fff; }
+
+/* Add button — filled accent */
+.btn--add {
+  background: var(--btn-add-bg);
+  color: var(--btn-add-color);
+  flex-shrink: 0;
+}
+.btn--add:hover { background: var(--accent-hover); }
+
+/* Delete button */
+.btn--delete {
+  background: var(--delete-bg);
+  color: var(--delete-color);
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  border-radius: var(--radius-sm);
+}
+.btn--delete:hover { filter: brightness(0.88); }
+
+/* Edit button */
+.btn--edit {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 4px 8px;
+  font-size: 0.78rem;
+  border-radius: var(--radius-sm);
+}
+.btn--edit:hover { color: var(--accent); border-color: var(--accent); }
+
+/* Outline small */
+.btn--outline-sm {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 6px 12px;
+  font-size: 0.82rem;
+}
+.btn--outline-sm:hover { background: var(--accent); color: #fff; }
+
+/* Icon button (theme toggle) */
+.btn--icon {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 5px 9px;
+  font-size: 1rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.btn--icon:hover { background: var(--bg-input); }
+
+/* ── Inputs ────────────────────────────────────────────────── */
+.input {
+  flex: 1;
+  padding: 8px 12px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-family: var(--font);
+  color: var(--text);
+  outline: none;
+  min-width: 0;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(92,107,192,0.15);
+}
+
+.input--sm { max-width: 180px; }
+
+.input--tiny {
+  max-width: 64px;
+  flex: none;
+  text-align: center;
+  padding: 6px 8px;
+}
+
+/* ── Select ────────────────────────────────────────────────── */
+.select {
+  padding: 7px 10px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-family: var(--font);
+  color: var(--text);
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--transition);
+}
+.select:focus { border-color: var(--accent); }
+
+/* ── Labels ────────────────────────────────────────────────── */
+.small-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ── Empty message ─────────────────────────────────────────── */
+.empty-msg {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.84rem;
+  padding: 10px 0 4px;
+  font-style: italic;
+}
+
+/* ── Toast ─────────────────────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(16px);
+  background: #2d2d2d;
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 100px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s, transform 0.22s;
+  z-index: 9999;
+  white-space: nowrap;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  body { padding: 18px 10px 36px; }
+
+  .middle-row {
+    grid-template-columns: 1fr;
+  }
+
+  .links-input-row {
+    flex-direction: column;
+  }
+
+  .links-input-row .btn { width: 100%; }
+
+  .clock { font-size: 2.1rem; }
+  .timer-display { font-size: 2.6rem; }
+}
